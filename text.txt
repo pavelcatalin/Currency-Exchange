@@ -1,0 +1,481 @@
+let baseCurrencies = [];
+let baseCurrency;
+let amount;
+
+
+// Get currencies symbol, name and flag
+document.querySelector('.open-modal').addEventListener('click',addCurrenciesToList)
+
+function addCurrenciesToList (){
+    let details = Object.entries(mokCurrencies.symbols);
+    let currenciesList = document.querySelector('.currencies-list');
+    let li = document.querySelectorAll('.currencies-list li')
+    if(li.length === 0){
+    details.forEach(value => {
+        let listElement = document.createElement('li')
+        listElement.innerHTML = `
+        <img src="Assets/flags/${value[0]}.png">
+        <span>
+        <span id = "abreviation">${value[0]}</span>
+        <span id = "country-name">- ${value[1]} </span>
+        </span>
+        `
+        currenciesList.appendChild(listElement)
+         
+    })
+}
+}
+
+document.querySelector('.currencies-list ').addEventListener('click',addedCurencies)
+
+function addedCurencies (e){
+    let targetValue = e.target.closest('li').children[1].children[0].innerText;
+
+    if(!e.target.closest('li').classList.contains("disabled")){
+        baseCurrencies.push(targetValue)
+        e.target.closest('li').classList.add("disabled")
+    }else{
+        e.target.closest('li').classList.remove("disabled")
+        baseCurrencies = baseCurrencies.filter(value => value !== targetValue)
+       
+    }
+    
+}
+document.querySelector('.add-base-currency ').addEventListener('click',addBaseCurrency)
+
+function addBaseCurrency (){
+    let baseCurrenciesList = document.querySelector('#base-currency');
+    baseCurrenciesList.innerHTML = ""
+    
+    baseCurrencies.forEach(value => {
+        
+        let listElement = document.createElement('option')
+        
+        
+        listElement.innerHTML =
+        `<img src="Assets/flags/${value}.png">
+        <span class="currency-abr">${value}</span>
+        `
+        listElement.setAttribute("value", value)
+        baseCurrenciesList.appendChild(listElement)
+            
+    })
+    baseCurrenciesList.value = undefined ? baseCurrency:baseCurrencies[0];
+    baseCurrency = baseCurrenciesList.value
+    if(!amount){
+        amount = 0
+    }
+    //ar()
+    closemodal()
+    addCardToUI()
+}
+
+document.querySelector('#base-currency').addEventListener('change', updateCurrency);
+document.querySelector('#amount').addEventListener('input', updateCurrency);
+
+function updateCurrency (){
+    baseCurrency = document.querySelector("#base-currency").value;
+    amount = Number(document.querySelector("#amount").value);
+    
+}
+
+function addCardToUI(){
+    let checkBaseCurrency = baseCurrencies.find(val => val === baseCurrency)
+    const baseCurrencyRate = mokCurrencies.rates[checkBaseCurrency];
+    
+    
+    
+    let cardContainer = document.querySelector('.card-container');
+    cardContainer.innerHTML = "";
+    
+    baseCurrencies.forEach(value =>{
+    let card = document.createElement('div')
+        
+        
+    const exchangeRate = checkBaseCurrency === value ? 1 : (mokCurrencies.rates[value]/baseCurrencyRate).toFixed(2);
+    card.innerHTML = `
+    <div class="close-card">
+                    <button class="close-card-btn">X</button>
+                </div>
+
+                <div class="flag-amount">
+                    <img src="Assets/flags/${value}.png" alt="">
+                    <span class="symbol">&euro;</span>
+                    <span class="amount">${exchangeRate}</span>
+                </div>
+
+                <div class="name-rate">
+                    <p class="abreviation"><span>${value}</span> - <span>${mokCurrencies.symbols[`${value}`]}</span></p>
+                    <p class="rate"><span>1 ${checkBaseCurrency}</span> = <span>${exchangeRate}${value}</span></p>
+                </div>
+    `
+
+    if(value === checkBaseCurrency){
+        card.classList.add('base-currency')
+    }
+    card.classList.add('card')
+    cardContainer.appendChild(card)
+
+    })
+
+
+    
+
+
+    
+
+
+
+
+    //console.log(mokCurrencies.rates[`${checkBaseCurrency}`] * amount)
+}
+
+
+
+
+in
+
+
+let currencies = [
+    {
+      name: "US Dollar",
+      abbreviation: "USD",
+      symbol: "\u0024",
+      flagURL: "http://www.geonames.org/flags/l/us.gif"
+    },
+    {
+      name: "Euro",
+      abbreviation: "EUR",
+      symbol: "\u20AC",
+      flagURL: "https://upload.wikimedia.org/wikipedia/commons/b/b7/Flag_of_Europe.svg"
+    },
+    {
+      name: "Japanese Yen",
+      abbreviation: "JPY",
+      symbol: "\u00A5",
+      flagURL: "http://www.geonames.org/flags/l/jp.gif"
+    },
+    {
+      name: "British Pound",
+      abbreviation: "GBP",
+      symbol: "\u00A3",
+      flagURL: "http://www.geonames.org/flags/l/uk.gif"
+    },
+    {
+      name: "Australian Dollar",
+      abbreviation: "AUD",
+      symbol: "\u0024",
+      flagURL: "http://www.geonames.org/flags/l/au.gif"
+    },
+    {
+      name: "Canadian Dollar",
+      abbreviation: "CAD",
+      symbol: "\u0024",
+      flagURL: "http://www.geonames.org/flags/l/ca.gif"
+    },
+    {
+      name: "Swiss Franc",
+      abbreviation: "CHF",
+      symbol: "\u0043\u0048\u0046",
+      flagURL: "http://www.geonames.org/flags/l/ch.gif"
+    },
+    {
+      name: "Chinese Yuan Renminbi",
+      abbreviation: "CNY",
+      symbol: "\u00A5",
+      flagURL: "http://www.geonames.org/flags/l/cn.gif"
+    },
+    {
+      name: "Swedish Krona",
+      abbreviation: "SEK",
+      symbol: "\u006B\u0072",
+      flagURL: "http://www.geonames.org/flags/l/se.gif"
+    },
+    {
+      name: "New Zealand Dollar",
+      abbreviation: "NZD",
+      symbol: "\u0024",
+      flagURL: "http://www.geonames.org/flags/l/nz.gif"
+    },
+    {
+      name: "Mexican Peso",
+      abbreviation: "MXN",
+      symbol: "\u0024",
+      flagURL: "http://www.geonames.org/flags/l/mx.gif"
+    },
+    {
+      name: "Singapore Dollar",
+      abbreviation: "SGD",
+      symbol: "\u0024",
+      flagURL: "http://www.geonames.org/flags/l/sg.gif"
+    },
+    {
+      name: "Hong Kong Dollar",
+      abbreviation: "HKD",
+      symbol: "\u0024",
+      flagURL: "http://www.geonames.org/flags/l/hk.gif"
+    },
+    {
+      name: "Norwegian Krone",
+      abbreviation: "NOK",
+      symbol: "\u006B\u0072",
+      flagURL: "http://www.geonames.org/flags/l/no.gif"
+    },
+    {
+      name: "South Korean Won",
+      abbreviation: "KRW",
+      symbol: "\u20A9",
+      flagURL: "http://www.geonames.org/flags/l/kr.gif"
+    },
+    {
+      name: "Turkish Lira",
+      abbreviation: "TRY",
+      symbol: "\u20BA",
+      flagURL: "http://www.geonames.org/flags/l/tr.gif"
+    },
+    {
+      name: "Russian Ruble",
+      abbreviation: "RUB",
+      symbol: "\u20BD",
+      flagURL: "http://www.geonames.org/flags/l/ru.gif"
+    },
+    {
+      name: "Indian Rupee",
+      abbreviation: "INR",
+      symbol: "\u20B9",
+      flagURL: "http://www.geonames.org/flags/l/in.gif"
+    },
+    {
+      name: "Brazilian Real",
+      abbreviation: "BRL",
+      symbol: "\u0052\u0024",
+      flagURL: "http://www.geonames.org/flags/l/br.gif"
+    },
+    {
+      name: "South African Rand",
+      abbreviation: "ZAR",
+      symbol: "\u0052",
+      flagURL: "http://www.geonames.org/flags/l/za.gif"
+    },
+    {
+      name: "Philippine Peso",
+      abbreviation: "PHP",
+      symbol: "\u20B1",
+      flagURL: "http://www.geonames.org/flags/l/ph.gif"
+    },
+    {
+      name: "Czech Koruna",
+      abbreviation: "CZK",
+      symbol: "\u004B\u010D",
+      flagURL: "http://www.geonames.org/flags/l/cz.gif"
+    },
+    {
+      name: "Indonesian Rupiah",
+      abbreviation: "IDR",
+      symbol: "\u0052\u0070",
+      flagURL: "http://www.geonames.org/flags/l/id.gif"
+    },
+    {
+      name: "Malaysian Ringgit",
+      abbreviation: "MYR",
+      symbol: "\u0052\u004D",
+      flagURL: "http://www.geonames.org/flags/l/my.gif"
+    },
+    {
+      name: "Hungarian Forint",
+      abbreviation: "HUF",
+      symbol: "\u0046\u0074",
+      flagURL: "http://www.geonames.org/flags/l/hu.gif"
+    },
+    {
+      name: "Icelandic Krona",
+      abbreviation: "ISK",
+      symbol: "\u006B\u0072",
+      flagURL: "http://www.geonames.org/flags/l/is.gif"
+    },
+    {
+      name: "Croatian Kuna",
+      abbreviation: "HRK",
+      symbol: "\u006B\u006E",
+      flagURL: "http://www.geonames.org/flags/l/hr.gif"
+    },
+    {
+      name: "Bulgarian Lev",
+      abbreviation: "BGN",
+      symbol: "\u043B\u0432",
+      flagURL: "http://www.geonames.org/flags/l/bg.gif"
+    },
+    {
+      name: "Romanian Leu",
+      abbreviation: "RON",
+      symbol: "\u006C\u0065\u0069",
+      flagURL: "http://www.geonames.org/flags/l/ro.gif"
+    },
+    {
+      name: "Danish Krone",
+      abbreviation: "DKK",
+      symbol: "\u006B\u0072",
+      flagURL: "http://www.geonames.org/flags/l/dk.gif"
+    },
+    {
+      name: "Thai Baht",
+      abbreviation: "THB",
+      symbol: "\u0E3F",
+      flagURL: "http://www.geonames.org/flags/l/th.gif"
+    },
+    {
+      name: "Polish Zloty",
+      abbreviation: "PLN",
+      symbol: "\u007A\u0142",
+      flagURL: "http://www.geonames.org/flags/l/pl.gif"
+    },
+    {
+      name: "Israeli Shekel",
+      abbreviation: "ILS",
+      symbol: "\u20AA",
+      flagURL: "http://www.geonames.org/flags/l/il.gif"
+    }
+  ];
+
+let addAllCurrencies = () =>{
+   
+    let currenciesList = document.querySelector('.currencies-list');
+
+    //console.log(currenciesList)
+    currencies.forEach( val =>{
+        currenciesList.insertAdjacentHTML("beforeend",
+        `
+            <li id=${val.abbreviation}>
+                <img src="Assets/flags/${val.abbreviation}.png">
+                <span>${val.abbreviation} - ${val.name}</span>
+            </li>
+        `)
+    })
+}
+
+let findCurrency = () =>{
+    initialCurrencies.forEach(val =>{
+        let currency = currencies.find(abr => abr.abbreviation === val )
+        if(currency){
+            addCurrencyToUI(currency)
+        }
+    } )
+}
+
+document.querySelector('.currencies-list').addEventListener('click', addCurrency)
+
+function addCurrency  (e) {
+    let clickedItem = e.target.closest('li');
+    
+    if(!clickedItem.classList.contains('disabled')){
+        const newCurrency = currencies.find(val => val.abbreviation === clickedItem.getAttribute('id'));
+        if(newCurrency)addCurrencyToUI(newCurrency)
+    }
+}
+
+
+
+let addCurrencyToUI = currency =>{
+    let currenciesList = document.querySelector('.card-container');
+    let dropDownList = document.querySelector('#base-currency');
+
+    if(currenciesList.childElementCount === 0){
+        baseCurrency = currency.abbreviation;
+        amount = 0;
+    }
+    document.querySelector(`#${currency.abbreviation}`).classList.add('disabled')
+    
+   // const baseCurrencyRate = currencies.find(val => val.abbreviation === baseCurrency).rate;
+    const baseCurrencyRate = 0.88;
+    
+    const exchangeRate = currency.abbreviation === baseCurrency ? 1 : (0.12/baseCurrencyRate).toFixed(2)
+    const inputValue = amount ? (amount * exchangeRate).toFixed(2) : "";
+    
+    currenciesList.insertAdjacentHTML('beforeend',`
+        <div class = "card" data-abreviation = ${currency.abbreviation}>
+            <div class="close-card">
+                <button class="close-card-btn">X</button>
+            </div>
+
+            <div class="flag-amount">
+                <img src="Assets/flags/${currency.abbreviation}.png" alt="">
+                <span class="symbol">&euro;</span>
+                <span class="amount">${inputValue}</span>
+            </div>
+
+            <div class="name-rate">
+                <p class="abreviation"><span>${currency.abbreviation}</span> - <span>${currency.name}</span></p>
+                <p class="rate"><span>1 ${baseCurrency}</span> = <span>${exchangeRate}${currency.abbreviation}</span></p>
+            </div>
+        
+        
+        </div>
+        `)
+    dropDownList.insertAdjacentHTML('beforeend',`
+    <option value=${currency.abbreviation}>${currency.abbreviation}</option>
+    
+    `)
+
+
+    
+}
+
+document.querySelector('.card-container').addEventListener('click', closeCard);
+
+function closeCard(e){
+    if(e.target.classList.contains('close-card-btn') ){
+    let getLi = e.target.parentElement.parentElement.getAttribute('data-abreviation')
+    
+    e.target.parentElement.parentElement.style.display = "none";
+    document.querySelector(`li#${getLi}`).classList.remove('disabled')
+  }
+
+}
+
+addAllCurrencies()
+findCurrency()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+let displayModal = () => document.querySelector('.modal-container').style.display = 'flex'  
+
+
+document.querySelector('.open-modal').addEventListener('click', displayModal)
+
+let closemodal = () => document.querySelector('.modal-container').style.display = 'none'
+
+document.querySelector('.modal-container').addEventListener('click', (e)=>{
+    let modal = document.querySelector('.modal-container')
+    if(e.target == modal){
+        closemodal()
+    }
+})

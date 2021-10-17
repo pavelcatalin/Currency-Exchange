@@ -1,0 +1,145 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	height: 100vh;
+	background-image: url("Assets/cool-background.svg");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.logo {
+	height: 10vh;
+	margin: 0 10vw;
+	display: flex;
+	align-items: center;
+	color: #c7e1f3;
+	text-shadow: 2px 2px 3px rgba(19, 17, 17, 0.22);
+}
+
+.app-container {
+	margin: 0 10vw;
+	height: 80vh;
+	opacity: 1;
+	box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+		rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
+
+.card-container {
+	height: 60%;
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	overflow: scroll;
+}
+.card-container::-webkit-scrollbar {
+	display: none;
+}
+
+.card {
+	background-color: white;
+	width: 300px;
+	height: 40%;
+	border-radius: 15px;
+
+	box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+		rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
+.inputs-container {
+	height: 30%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.main-inputs {
+	height: 70%;
+	display: flex;
+	align-items: start;
+	justify-content: center;
+}
+
+.modal-container {
+	display: none;
+	height: 100%;
+	width: 100%;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background-color: rgba(0, 0, 0, 0.5);
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+}
+
+.modal {
+	height: 60vh;
+	width: 350px;
+	background-color: rgb(234, 236, 245);
+	overflow: scroll;
+}
+.modal::-webkit-scrollbar {
+	display: none;
+}
+
+.modal ul li {
+	height: 65px;
+	padding: 20px 20px;
+	display: flex;
+	align-items: center;
+	border-bottom: 1px solid black;
+	cursor: pointer;
+}
+
+.modal ul li:hover {
+	background-color: white;
+}
+
+.modal ul li img {
+	margin-right: 20px;
+}
+
+.date {
+	padding: 20px 50px;
+	text-align: right;
+	color: white;
+	font-size: 20px;
+}
+/* New css */
+
+/* Card */
+
+.close-card {
+	display: flex;
+	justify-content: end;
+	padding: 10px;
+}
+
+.flag-amount {
+	height: 35%;
+}
+
+.name-rate {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.disabled {
+	background-color: white;
+	opacity: 0.1;
+	cursor: not-allowed;
+}
+
+.base-currency {
+	background-color: rgb(214, 242, 255);
+}

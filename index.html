@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="assets/exchange.ico" />
+    <link rel="stylesheet" href="style.css">
+    
+    <title>Currency Exchange</title>
+</head>
+<body>
+
+
+    <div class="logo"><h1>Currency Exchange</h1></div>
+    
+    <div class="app-container">
+
+        <div class="date">
+            2021-10-02
+        </div>
+         
+
+        <div class="card-container">
+
+            <!-- <div class="card">
+
+                <div class="close-card">
+                    <button class="close-card-btn">X</button>
+                </div>
+
+                <div class="flag-amount">
+                    <img src="https://flagcdn.com/32x24/ar.png" alt="">
+                    <span class="symbol">&euro;</span>
+                    <span class="amount">135</span>
+                </div>
+
+                <div class="name-rate">
+                    <p class="abreviation"><span>EUR</span>-<span>Euro</span></p>
+                    <p class="rate"><span>EUR</span>=<span>EUR</span></p>
+                </div>
+
+            </div> -->
+            
+        </div>
+
+        <div class="inputs-container">
+
+            <div class="main-inputs">
+                <select id="base-currency" name="currencies">
+                    <!-- <option value="volvo">Volvo</option>
+                    <option value="saab">Saab</option>
+                    <option value="fiat">Fiat</option>
+                    <option value="audi">Audi</option> -->
+                </select>
+    
+                  <input type="number" name="nmber" id="amount" min="0">
+            </div>
+
+              <button class="open-modal">Add Currency</button>
+        </div>
+        
+    </div>
+
+    <div class="modal-container">
+
+        <div class="modal">
+            <ul class="currencies-list">
+               
+            </ul>
+        </div>
+        <button class="add-base-currency">Add Currency</button>
+    </div>
+
+
+
+
+
+
+
+
+
+    <script src="index.js"></script>
+</body>
+</html>
